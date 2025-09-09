@@ -17,6 +17,8 @@ kotlin {
         compileSdk = 36
         minSdk = 26
 
+        experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
+
         withHostTestBuilder {
         }
 
@@ -62,7 +64,6 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(projects.features.splash.api)
                 implementation(libs.kotlin.stdlib)
                 implementation(compose.runtime)
                 implementation(compose.foundation)
@@ -72,6 +73,10 @@ kotlin {
                 implementation(compose.components.uiToolingPreview)
                 implementation(libs.androidx.lifecycle.viewmodelCompose)
                 implementation(libs.androidx.lifecycle.runtimeCompose)
+                //ui
+                implementation(projects.base.ui)
+                //lottie
+                implementation(libs.compottie)
             }
         }
 

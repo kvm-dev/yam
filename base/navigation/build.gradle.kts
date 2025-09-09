@@ -2,6 +2,10 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.android.lint)
+    alias(libs.plugins.androidLibrary) apply false
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
@@ -31,7 +35,7 @@ kotlin {
     // A step-by-step guide on how to include this library in an XCode
     // project can be found here:
     // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "base:navigationKit"
+    val xcfName = "base-navigationKit"
 
     iosX64 {
         binaries.framework {
@@ -60,7 +64,27 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlin.stdlib)
-                // Add KMP dependencies here
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                implementation(compose.ui)
+                implementation(compose.components.resources)
+                implementation(compose.components.uiToolingPreview)
+                implementation(libs.androidx.lifecycle.viewmodelCompose)
+                implementation(libs.androidx.lifecycle.runtimeCompose)
+                implementation(libs.navigation)
+                //screens
+                implementation(projects.features.splash.impl)
+                implementation(projects.features.home.impl)
+                implementation(projects.features.info.impl)
+                implementation(projects.features.orders.impl)
+                implementation(projects.features.settings.impl)
+                //ui
+                implementation(projects.base.ui)
+//                implementation(libs.coil.svg)
+//                implementation(libs.coil.compose)
+                //annotations
+                implementation(libs.annotation)
             }
         }
 
