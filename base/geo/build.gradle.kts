@@ -1,7 +1,12 @@
+import org.gradle.kotlin.dsl.invoke
+import java.net.URI
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.android.lint)
+    alias(libs.plugins.spm)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -51,6 +56,12 @@ kotlin {
         }
     }
 
+    compilerOptions {
+        // KLIB resolver: The same 'unique_name=annotation_commonMain' found in more than one library
+        allWarningsAsErrors = false
+        freeCompilerArgs.addAll("-Xexpect-actual-classes", "-Xconsistent-data-class-copy-visibility")
+    }
+
     // Source set declarations.
     // Declaring a target automatically creates a source set with the same name. By default, the
     // Kotlin Gradle Plugin creates additional source sets that depend on each other, since it is
@@ -60,7 +71,8 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlin.stdlib)
-                // Add KMP dependencies here
+                implementation(libs.androidx.lifecycle.viewmodelCompose)
+                implementation(libs.androidx.lifecycle.runtimeCompose)
             }
         }
 
@@ -96,5 +108,4 @@ kotlin {
             }
         }
     }
-
 }

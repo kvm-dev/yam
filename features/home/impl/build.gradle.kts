@@ -1,3 +1,5 @@
+import java.net.URI
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
@@ -5,6 +7,8 @@ plugins {
     alias(libs.plugins.androidLibrary) apply false
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.spm)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -42,17 +46,55 @@ kotlin {
         binaries.framework {
             baseName = xcfName
         }
+
+        compilations {
+            val main by getting {
+                // Choose the cinterop name
+                cinterops.create("spmMaplibre")
+            }
+        }
     }
 
     iosArm64 {
         binaries.framework {
             baseName = xcfName
         }
+        compilations {
+            val main by getting {
+                // Choose the cinterop name
+                cinterops.create("spmMaplibre")
+            }
+        }
     }
 
     iosSimulatorArm64 {
         binaries.framework {
             baseName = xcfName
+        }
+
+        compilations {
+            val main by getting {
+                // Choose the cinterop name
+                cinterops.create("spmMaplibre")
+            }
+        }
+    }
+
+    compilerOptions {
+        // KLIB resolver: The same 'unique_name=annotation_commonMain' found in more than one library
+        allWarningsAsErrors = false
+        freeCompilerArgs.addAll("-Xexpect-actual-classes", "-Xconsistent-data-class-copy-visibility")
+    }
+
+    swiftPackageConfig {
+        create("spmMaplibre") {
+            dependency {
+                remotePackageVersion(
+                    url = URI("https://github.com/maplibre/maplibre-gl-native-distribution.git"),
+                    products = { add("MapLibre") },
+                    version = "6.17.1",
+                )
+            }
         }
     }
 
@@ -74,6 +116,15 @@ kotlin {
                 implementation(compose.components.uiToolingPreview)
                 implementation(libs.androidx.lifecycle.viewmodelCompose)
                 implementation(libs.androidx.lifecycle.runtimeCompose)
+                //maps
+                implementation(libs.maplibre.compose)
+                implementation(libs.maplibre.composeMaterial3)
+                //di
+                implementation(libs.koin.core)
+                implementation(libs.koin.compose)
+                implementation(libs.koin.compose.viewmodel)
+                //ui
+                implementation(projects.base.ui)
             }
         }
 
@@ -85,6 +136,8 @@ kotlin {
 
         androidMain {
             dependencies {
+                //di
+                implementation(libs.koin.android)
                 // Add Android-specific dependencies here. Note that this source set depends on
                 // commonMain by default and will correctly pull the Android artifacts of any KMP
                 // dependencies declared in commonMain.
