@@ -64,6 +64,10 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(projects.features.splash.api)
+                implementation(projects.features.user.api)
+                implementation(projects.features.geo.api)
+
                 implementation(libs.kotlin.stdlib)
                 implementation(compose.runtime)
                 implementation(compose.foundation)
@@ -77,6 +81,12 @@ kotlin {
                 implementation(projects.base.ui)
                 //lottie
                 implementation(libs.compottie)
+                //viewmodel
+                implementation(projects.base.viewmodel)
+                //di
+                implementation(libs.koin.core)
+                implementation(libs.koin.compose)
+                implementation(libs.koin.compose.viewmodel)
             }
         }
 
@@ -88,9 +98,8 @@ kotlin {
 
         androidMain {
             dependencies {
-                // Add Android-specific dependencies here. Note that this source set depends on
-                // commonMain by default and will correctly pull the Android artifacts of any KMP
-                // dependencies declared in commonMain.
+                //di
+                implementation(libs.koin.android)
             }
         }
 

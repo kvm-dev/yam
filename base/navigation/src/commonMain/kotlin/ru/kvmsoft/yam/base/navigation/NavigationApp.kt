@@ -40,11 +40,11 @@ import ru.kvmsoft.yam.base.ui.theme.MainBlackLight
 import ru.kvmsoft.yam.base.ui.theme.MainGreyLight
 import ru.kvmsoft.yam.base.ui.theme.MainMenuBackgroundLight
 import ru.kvmsoft.yam.base.ui.utils.NoRippleConfiguration
-import ru.kvmsoft.yam.home.impl.presentation.HomeScreen
+import ru.kvmsoft.yam.home.impl.presentation.ui.HomeScreen
 import ru.kvmsoft.yam.info.impl.presentation.InfoScreen
 import ru.kvmsoft.yam.orders.impl.presentation.OrdersScreen
 import ru.kvmsoft.yam.settings.impl.presentation.SettingsScreen
-import ru.kvmsoft.yam.splash.impl.presentation.SplashScreen
+import ru.kvmsoft.yam.splash.impl.presentation.ui.SplashScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

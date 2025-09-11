@@ -1,0 +1,70 @@
+
+CREATE TABLE User (
+    userId INTEGER NOT NULL,
+    userPhone TEXT NOT NULL,
+    userName TEXT NOT NULL,
+    userEmail TEXT NOT NULL,
+    userHomeAddress TEXT NOT NULL,
+    userHomeLat REAL NOT NULL,
+    userHomeLng REAL NOT NULL
+);
+
+CREATE TABLE UserOrdersHistory (
+    orderId INTEGER NOT NULL,
+    fromLat REAL NOT NULL,
+    fromLng REAL NOT NULL,
+    fromAddress TEXT NOT NULL,
+    toLat REAL NOT NULL,
+    toLng REAL NOT NULL,
+    toAddress TEXT NOT NULL
+);
+
+
+insertUser:
+INSERT INTO User(userId, userPhone, userName, userEmail, userHomeAddress, userHomeLat, userHomeLng)
+VALUES(?, ?, ?, ?, ?, ?, ?);
+
+selectUser:
+SELECT User.*
+FROM User
+WHERE userId = :userId;
+
+clearUser:
+DELETE FROM User;
+
+updateUserPhone:
+UPDATE User
+SET userPhone = :userPhone
+WHERE userId = :userId;
+
+updateUserName:
+UPDATE User
+SET userName = :userName
+WHERE userId = :userId;
+
+updateUserEmail:
+UPDATE User
+SET userEmail = :userEmail
+WHERE userId = :userId;
+
+updateUserHomeAddress:
+UPDATE User
+SET userHomeAddress = :userHomeAddress,
+    userHomeLat = :userHomeLat,
+    userHomeLng = :userHomeLng
+WHERE userId IS :userId;
+
+insertOrderHistory:
+INSERT INTO UserOrdersHistory(orderId, fromAddress, fromLat, fromLng, toAddress, toLat, toLng)
+VALUES(?, ?, ?, ?, ?, ?, ?);
+
+selectOrdersHistory:
+SELECT UserOrdersHistory.*
+FROM UserOrdersHistory;
+
+clearOrdersHistory:
+DELETE FROM UserOrdersHistory;
+
+
+
+

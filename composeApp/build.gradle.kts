@@ -49,8 +49,11 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
-            //screens for di
+            //features di
+            implementation(projects.features.geo.impl)
+            implementation(projects.features.user.impl)
             implementation(projects.features.home.impl)
+            implementation(projects.features.splash.impl)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

@@ -8,7 +8,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.spm)
-    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
@@ -107,6 +107,9 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.features.home.api)
+                implementation(projects.features.geo.api)
+
+                implementation(projects.base.viewmodel)
                 implementation(libs.kotlin.stdlib)
                 implementation(compose.runtime)
                 implementation(compose.foundation)
