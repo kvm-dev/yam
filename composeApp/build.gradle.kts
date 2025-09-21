@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
@@ -54,6 +55,8 @@ kotlin {
             implementation(projects.features.user.impl)
             implementation(projects.features.home.impl)
             implementation(projects.features.splash.impl)
+            //local storage and database
+            implementation(projects.base.storage)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

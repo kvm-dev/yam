@@ -14,10 +14,12 @@ import androidx.compose.ui.unit.dp
 import dev.sargunv.maplibrecompose.compose.CameraState
 import dev.sargunv.maplibrecompose.compose.ClickResult
 import dev.sargunv.maplibrecompose.compose.MaplibreMap
+import dev.sargunv.maplibrecompose.compose.StyleState
 import dev.sargunv.maplibrecompose.compose.layer.SymbolLayer
 import dev.sargunv.maplibrecompose.compose.rememberCameraState
 import dev.sargunv.maplibrecompose.compose.rememberStyleState
 import dev.sargunv.maplibrecompose.compose.source.rememberGeoJsonSource
+import dev.sargunv.maplibrecompose.core.BaseStyle
 import dev.sargunv.maplibrecompose.core.CameraPosition
 import dev.sargunv.maplibrecompose.core.MapOptions
 import dev.sargunv.maplibrecompose.core.OrnamentOptions
@@ -56,7 +58,7 @@ fun HomeScreen(homeScreenViewModel: HomeScreenViewModel = koinViewModel(), onBac
     val styleState = rememberStyleState()
     Box(Modifier.fillMaxSize()) {
         MaplibreMap(
-//            baseStyle = BaseStyle.Uri("https://tiles.openfreemap.org/styles/liberty"),
+            baseStyle = BaseStyle.Uri("https://tiles.openfreemap.org/styles/liberty"),
             cameraState = cameraState,
             styleState = styleState,
             options = MapOptions(ornamentOptions = OrnamentOptions.OnlyLogo),

@@ -61,9 +61,14 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                //datetime
+                implementation(libs.datetime)
                 implementation(libs.kotlin.stdlib)
                 //sqldelight
                 implementation(libs.sqldelight.coroutines.extension)
+                //di
+                implementation(libs.koin.core)
+                implementation(libs.koin.compose)
             }
         }
 
@@ -76,7 +81,8 @@ kotlin {
         androidMain {
             dependencies {
                 //sqldelight
-                implementation(libs.sqldelight.android.driver)
+                implementation(libs.sqldelight.android.driver)//di
+                implementation(libs.koin.android)
             }
         }
 
@@ -104,3 +110,5 @@ sqldelight {
         }
     }
 }
+
+//for reinit local db use in terminal   ./gradlew generateSqlDelightInterface

@@ -6,6 +6,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinApplication
 import org.koin.dsl.KoinAppDeclaration
 import ru.kvmsoft.yam.base.navigation.NavigationApp
+import ru.kvmsoft.yam.base.storage.AppDatabase
+import ru.kvmsoft.yam.base.storage.di.storageModule
+import ru.kvmsoft.yam.base.storage.di.storageModulePlatform
 import ru.kvmsoft.yam.geo.impl.di.geoModule
 import ru.kvmsoft.yam.geo.impl.di.geoModulePlatform
 import ru.kvmsoft.yam.home.impl.di.homeModule
@@ -14,10 +17,12 @@ import ru.kvmsoft.yam.user.impl.di.userModule
 
 @Composable
 @Preview
-fun App(koinAppDeclaration: KoinAppDeclaration? = null) {
+fun App(koinAppDeclaration: KoinAppDeclaration? = null, database: AppDatabase) {
     KoinApplication(application = {
         koinAppDeclaration?.invoke(this)
-        modules(geoModulePlatform, geoModule, userModule, homeModule, splashModule)
+        modules(geoModulePlatform, geoModule, userModule, homeModule, splashModule,
+            storageModulePlatform, storageModule, userModule
+        )
     }) {
         MaterialTheme{
             NavigationApp()

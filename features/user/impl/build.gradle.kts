@@ -60,12 +60,15 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.features.user.api)
-
+                //storage
+                implementation(projects.base.storage)
                 implementation(libs.kotlin.stdlib)
 
                 //di
                 implementation(libs.koin.core)
                 implementation(libs.koin.compose)
+                //utils
+                implementation(projects.base.utils)
             }
         }
 

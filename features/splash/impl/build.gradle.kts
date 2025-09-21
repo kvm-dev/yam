@@ -64,10 +64,11 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                //api
                 implementation(projects.features.splash.api)
                 implementation(projects.features.user.api)
                 implementation(projects.features.geo.api)
-
+                //base libs
                 implementation(libs.kotlin.stdlib)
                 implementation(compose.runtime)
                 implementation(compose.foundation)
@@ -77,6 +78,8 @@ kotlin {
                 implementation(compose.components.uiToolingPreview)
                 implementation(libs.androidx.lifecycle.viewmodelCompose)
                 implementation(libs.androidx.lifecycle.runtimeCompose)
+                //utils
+                implementation(projects.base.utils)
                 //ui
                 implementation(projects.base.ui)
                 //lottie

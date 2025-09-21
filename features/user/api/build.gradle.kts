@@ -60,7 +60,10 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlin.stdlib)
-                // Add KMP dependencies here
+                //utils
+                implementation(projects.base.utils)
+                //lifecycle
+                implementation(libs.androidx.lifecycle.runtimeCompose)
             }
         }
 

@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
+import ru.kvmsoft.yam.base.model.ResultState
 import ru.kvmsoft.yam.base.viewmodel.BaseViewModel
 import ru.kvmsoft.yam.base.viewmodel.model.ProgressState
 import ru.kvmsoft.yam.splash.impl.domain.SplashInteractor
@@ -24,8 +25,9 @@ class SplashScreenViewModel(private val interactor: SplashInteractor) : BaseView
     fun initViewModel() = with(viewModelScope + coroutineExceptionHandler) {
         if(progressState.value == ProgressState.LOADING){
             launch(Dispatchers.IO) {
-                val currentState = interactor.getCurrentState()
-                _uiState.update { currentState }
+                interactor.userState.collect { userState->
+                _uiState.update { interactor.getCurrentState(userState) }
+                }
             }
         }
     }

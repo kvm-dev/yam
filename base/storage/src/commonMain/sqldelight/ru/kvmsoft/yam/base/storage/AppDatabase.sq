@@ -10,13 +10,14 @@ CREATE TABLE User (
 );
 
 CREATE TABLE UserOrdersHistory (
-    orderId INTEGER NOT NULL,
+    orderId INTEGER PRIMARY KEY AUTOINCREMENT,
     fromLat REAL NOT NULL,
     fromLng REAL NOT NULL,
     fromAddress TEXT NOT NULL,
     toLat REAL NOT NULL,
     toLng REAL NOT NULL,
-    toAddress TEXT NOT NULL
+    toAddress TEXT NOT NULL,
+    dateTime INTEGER NOT NULL
 );
 
 
@@ -55,8 +56,8 @@ SET userHomeAddress = :userHomeAddress,
 WHERE userId IS :userId;
 
 insertOrderHistory:
-INSERT INTO UserOrdersHistory(orderId, fromAddress, fromLat, fromLng, toAddress, toLat, toLng)
-VALUES(?, ?, ?, ?, ?, ?, ?);
+INSERT INTO UserOrdersHistory(orderId, fromAddress, fromLat, fromLng, toAddress, toLat, toLng, dateTime)
+VALUES(?, ?, ?, ?, ?, ?, ?, ?);
 
 selectOrdersHistory:
 SELECT UserOrdersHistory.*
